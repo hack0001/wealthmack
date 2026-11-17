@@ -1,0 +1,4 @@
+# Cloudflare redirects, one per line: <old path> <new path> <status>
+# Add old WordPress URLs that still get visits or have links pointing at them,
+# so they land on the closest new page instead of a 404. For example:
+# /old-wordpress-post-slug /options 301
