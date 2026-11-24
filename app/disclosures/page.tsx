@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Disclosures and risk",
-  description: `Risk warning, the limits of what ${site.name} provides, and how the site is funded.`,
+  title: "Terms of use and risk disclosures",
+  description: `The terms for using ${site.name}, the risks of options trading, and how the site is funded.`,
   alternates: { canonical: "/disclosures" },
 };
 
@@ -13,7 +13,7 @@ export default function Disclosures() {
   return (
     <div className="wrap">
       <header className="page-head">
-        <h1>Disclosures and risk</h1>
+        <h1>Terms of use and risk disclosures</h1>
       </header>
       <div className="prose">
         <h2>Education, not advice</h2>
@@ -28,7 +28,7 @@ export default function Disclosures() {
           can expose you to losses far larger than the premium received.
           Before trading listed US options, read the Options Clearing
           Corporation&rsquo;s{" "}
-          <a href="https://www.theocc.com/company-information/documents-and-archives/options-disclosure-document">
+          <a href="https://www.theocc.com/Company-Information/Documents-and-Archives/Options-Disclosure-Document">
             Characteristics and Risks of Standardized Options
           </a>.
         </p>
@@ -38,6 +38,14 @@ export default function Disclosures() {
           commissions, taxes, dividends and early assignment, and they are
           not a forecast. Check any figure with your broker before acting on it.
         </p>
+        <h2>Using the site</h2>
+        <ul>
+          <li>Articles, calculators and examples are provided as they are, for general education. They may contain errors, and they can go out of date.</li>
+          <li>You are responsible for your own investment decisions and for checking figures with your broker.</li>
+          <li>{site.name} is not liable for losses arising from use of the site, to the extent the law allows.</li>
+          <li>The writing, tools and design are {site.name}&rsquo;s work. You are welcome to link to any page and quote short passages with credit; please don&rsquo;t republish whole articles.</li>
+          <li>These terms may change. The current version is always on this page.</li>
+        </ul>
         <h2>How the site is funded</h2>
         <p>
           {site.name} currently has no advertising and no affiliate

@@ -34,10 +34,20 @@ Add a file such as `content/options/my-article.md`:
 
 ## Before launch
 
-1. Fill in `author` in `lib/site.ts`.
+1. Fill in `author` and `contact.email` in `lib/site.ts`.
 2. Finish or remove the draft in `content/psychology/`.
-3. Have `app/disclosures/page.tsx` checked.
+3. Have `app/disclosures/page.tsx` (terms and risk) and `app/privacy/page.tsx` checked.
 4. Add redirects for any old WordPress URLs worth keeping to `public/_redirects`.
+
+## After launch (in Cloudflare and Google)
+
+- Cloudflare: SSL/TLS, Edge Certificates, turn on Always Use HTTPS.
+- Cloudflare: Web Analytics, add wealthmack.com (cookieless, so no cookie banner needed).
+  The privacy policy assumes this is on.
+- Google Search Console and Bing Webmaster Tools: verify the domain and submit
+  https://wealthmack.com/sitemap.xml.
+- Rollback: Cloudflare keeps every deployment, so an earlier one can be restored from the
+  Worker's Deployments tab. Reverting the commit in GitHub Desktop and pushing also works.
 
 ## Deploying (GitHub + Cloudflare)
 

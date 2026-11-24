@@ -13,7 +13,7 @@ You are swapping some of your possible upside for cash now. Whether that is a go
 
 You own 100 shares bought at $50. You sell one call with a $52.50 strike that expires in 30 days, and receive $1.20 per share.
 
-| | Per share | For 100 shares |
+| Item | Per share | For 100 shares |
 |---|---|---|
 | Shares bought at | $50.00 | $5,000 |
 | Premium received | $1.20 | $120 |

@@ -10,6 +10,7 @@ export const metadata: Metadata = {
   title: { default: `${site.name}: ${site.tagline}`, template: `%s | ${site.name}` },
   description: site.description,
   openGraph: { siteName: site.name, type: "website", locale: "en_US" },
+  twitter: { card: "summary_large_image" },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
@@ -40,7 +41,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             </p>
             <nav aria-label="Footer">
               <Link href="/about">About</Link>
-              <Link href="/disclosures">Disclosures and risk</Link>
+              <Link href="/disclosures">Terms and risk</Link>
+              <Link href="/privacy">Privacy</Link>
             </nav>
           </div>
         </footer>

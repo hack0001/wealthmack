@@ -7,6 +7,21 @@ export const metadata: Metadata = {
   alternates: { canonical: "/about" },
 };
 
+const personLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: site.author.name,
+  url: `${site.url}/about`,
+  email: `mailto:${site.contact.email}`,
+  knowsAbout: site.author.knowsAbout,
+  hasCredential: {
+    "@type": "EducationalOccupationalCredential",
+    name: site.author.qualification,
+    recognizedBy: { "@type": "Organization", name: "Chartered Institute for Securities & Investment", url: "https://www.cisi.org" },
+  },
+  worksFor: { "@type": "Organization", name: site.name, url: site.url },
+};
+
 export default function About() {
   return (
     <div className="wrap">
@@ -15,17 +30,26 @@ export default function About() {
       </header>
       <div className="prose">
         <p>
-          {site.name} covers options income strategies and the psychology of
-          the people trading them. Every strategy comes with a calculator so
+          {site.name} covers options income strategies, dividend investing and
+          the psychology of the people doing it. Every strategy comes with a calculator so
           you can check the claims against your own numbers.
         </p>
-        {/* TODO: fill in site.author in lib/site.ts. Your wealth management
-            background is the strongest trust signal the site has, so be
-            specific: roles, years, qualifications, and what you did not do. */}
-        {site.author.name && (
+        <h2>Who writes it</h2>
+        {site.author.bio.map((para) => (
+          <p key={para.slice(0, 24)}>{para}</p>
+        ))}
+        <p>
+          I don&rsquo;t give personal advice, and nothing on {site.name} tells
+          you what to buy or sell. It shows you how to work out what a trade
+          would do, so the decision stays yours.
+        </p>
+        {site.contact.email && (
           <>
-            <h2>Who writes it</h2>
-            <p>{site.author.bio}</p>
+            <h2>Get in touch</h2>
+            <p>
+              Spotted a mistake, or have a question about a calculator? Email{" "}
+              <a href={`mailto:${site.contact.email}`}>{site.contact.email}</a>.
+            </p>
           </>
         )}
         <h2>How the site works</h2>
@@ -36,6 +60,7 @@ export default function About() {
           <li>If something is wrong, it gets corrected and the article shows the date it was updated.</li>
         </ul>
       </div>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(personLd) }} />
     </div>
   );
 }

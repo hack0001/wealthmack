@@ -27,7 +27,11 @@ body {
   font-family: var(--body);
   font-size: 1.0625rem;
   line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
+main { flex: 1; }
 h1, h2, h3 {
   font-family: var(--display);
   color: var(--ink);
@@ -189,3 +193,7 @@ a:hover { color: var(--ink); }
   .chart-tick, .chart-axis { font-size: 17px; }
   .chart-label { font-size: 19px; }
 }
+
+.hero-copy .credential { font-size: 0.95rem; color: #b5b2a8; }
+.credential a { color: inherit; text-decoration-color: rgba(196, 114, 42, 0.7); }
+.credential a:hover { color: var(--paper); }

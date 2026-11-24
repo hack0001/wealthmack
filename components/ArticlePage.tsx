@@ -21,6 +21,15 @@ export default function ArticlePage({ section, slug }: { section: SectionKey; sl
   const a = getArticle(section, slug);
   if (!a) notFound();
   const s = sections[section];
+  const breadcrumbs = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: site.url },
+      { "@type": "ListItem", position: 2, name: s.title, item: `${site.url}${s.path}` },
+      { "@type": "ListItem", position: 3, name: a.title },
+    ],
+  };
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Article",
@@ -53,7 +62,7 @@ export default function ArticlePage({ section, slug }: { section: SectionKey; sl
           <Link className="button" href={a.tool}>Open the calculator</Link>
         </aside>
       )}
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify([jsonLd, breadcrumbs]).replace(/</g, "\\u003c") }} />
     </article>
   );
 }
