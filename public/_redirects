@@ -1,4 +1,14 @@
 # Cloudflare redirects, one per line: <old path> <new path> <status>
-# Add old WordPress URLs that still get visits or have links pointing at them,
-# so they land on the closest new page instead of a 404. For example:
-# /old-wordpress-post-slug /options 301
+# "/*" matches the old multi-page versions (/2/, /3/ ...) of an article too.
+#
+# Only old URLs with a genuinely related page on the new site are redirected.
+# Everything else from the old site gets the custom 404 page, which is what
+# Google expects for content that no longer exists.
+
+# Old WordPress articles (2023-2025)
+/11-bad-financial-habits-that-are-keeping-you-poor     /psychology  301
+/11-bad-financial-habits-that-are-keeping-you-poor/*   /psychology  301
+
+# Old magazine site (2020-2022)
+/business/online-trading-meet-the-traders-who-became-millionaires-from-working-at-home/*  /options  301
+/business/robinhood-trading-app-gamestop-hedge-funds-wall-street-retail-investor-deal/*   /psychology  301
