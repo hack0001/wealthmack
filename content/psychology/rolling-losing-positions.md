@@ -1,34 +1,61 @@
 ---
 title: "Why traders roll losing positions for too long"
-description: "Rolling feels like management. Often it is a way of not admitting the trade is wrong."
-date: 2026-11-11
-draft: true
+description: "Rolling a losing option feels like managing the trade. Often it is a way of not admitting it went wrong. How to tell the difference, with a worked example."
+date: 2026-11-26
+tool: /tools/cash-secured-put-calculator
 ---
 
-> This is a starting outline, not a finished article. It is marked `draft: true`, so it shows while you are developing and is left out of the live site. Replace the notes below with what you have actually seen, then remove the draft line.
+A short option has gone against you. You can close it and take the loss, or you can roll it: buy it back and sell a new one further out in time, usually for a small credit. Rolling for a credit feels like being paid to wait for the trade to come good. Sometimes it is exactly that. Often it is a way of never having to admit the trade was wrong.
 
-## The decision this article is about
+## What rolling actually does
 
-A short option has gone against you. You can close it and take the loss, or roll it: buy it back and sell another one further out in time, usually for a small credit. Rolling for a credit feels like getting paid to wait.
+Rolling is two trades presented as one. You close the losing position at a loss, then open a new position with a later expiry, and often a different strike. Brokers show the combined result as a single net credit or debit, which makes it feel like an adjustment to the original trade rather than a fresh decision.
+
+That framing is the problem. The loss on the first leg is real, whether or not you see it as a separate line. The new position is a brand-new commitment, with its own risk, and it deserves to be judged as one.
 
 ## Why rolling is so tempting
 
-- **The loss never becomes final.** Closing turns a paper loss into a real one. Rolling keeps it open, which is the disposition effect at work: people hold losers longer than winners because realising a loss hurts.
-- **The credit is visible and the risk is not.** The broker shows the premium collected on the roll. It does not show that more time means more exposure to the same position that is already losing.
-- **It feels like skill.** Adjusting a position looks like active management. Doing the same thing again because the alternative is painful is not the same as a plan.
+- **The loss never becomes final.** Closing turns a paper loss into a realised one, and people find that painful. Behavioural finance calls the tendency to hold losers too long and sell winners too early the disposition effect, and rolling is one of its neatest disguises.
+- **The credit is visible and the risk is not.** The screen shows the premium you collect on the roll. It does not show that you have extended your exposure to a position that is already going wrong, often for months.
+- **It feels like skill.** Adjusting a position looks like active management. Doing the same thing again and again because the alternative hurts is not a plan.
+- **It is activity in response to bad news.** The most common mistake I saw among clients in investment management was being too active, reacting to bad news even when doing nothing would have served them better. Rolling a loser can be the same reflex in a more sophisticated form.
 
-*Your notes: where did you see this pattern with clients or in your own trading? One specific, anonymised example is worth more than this whole section.*
+## A worked roll
+
+You sold a 30-day put on a $50 share with a $47.50 strike for $1.00. With five days left, the share has dropped to $42 and the put now costs $5.60 to buy back. All figures are per share; multiply by 100 for one contract.
+
+**Option 1: close it.** You pay $5.60 to buy back a put you sold for $1.00. The loss is **$4.60 a share**, or $460, and it is over.
+
+**Option 2: roll it.** You buy back the put for $5.60 and sell a 60-day put with a lower $45 strike for $6.00. The net credit is $0.40. Across both trades you have now collected $1.00 + $6.00 and paid $5.60, a net $1.40, and you are committed to buying the shares at $45 in two months.
+
+What happens next depends entirely on the share:
+
+| Share at the new expiry | Closed in week four | Rolled to $45 |
+|---|---|---|
+| $46 (recovers) | −$460 | +$140 |
+| $42 (stays put) | −$460 | −$160 |
+| $35 (keeps falling) | −$460 | −$860 |
+
+Rolling is not automatically wrong. If the share steadies or recovers, the roll does better. But it has exchanged a known $460 loss for a range of outcomes that includes a much bigger one, and it has tied up $4,500 of cash for another two months. That is a fresh bet on the share, and it should be made only if you would make it from scratch.
 
 ## How to tell management from avoidance
 
-Suggested test to develop: ignore the existing position and ask whether you would open the new one from scratch today, at this strike and this expiration, on this stock. If the answer is no, the roll is about the old loss and not about the new trade.
+Ignore the existing position and ask one question: **would I open the new position today, with fresh cash, at this strike and this expiry, on this share?**
 
-*Your notes: what rule do you actually use? Maximum number of rolls? A loss limit set before entry?*
+If the answer is yes, the roll is a reasonable trade that happens to start where an old one ended. If the answer is no, the roll is about the old loss, not the new opportunity, and closing is the better decision even though it hurts more.
 
-## What to write down before the trade
+Three warning signs that you are rolling to avoid a loss:
 
-- The price at which you will close, whatever the roll offers.
-- How many times you will roll before stopping.
-- What would have to be true about the stock for you to stay in.
+- You are rolling to the same or a lower premium for more time, again and again.
+- You can no longer explain why the share should recover, only that it might.
+- You are choosing the new strike by whichever one gives a credit, not by the price you want to pay.
 
-*Link this section to the trade journal tool once it exists.*
+## Decide before the trade
+
+The easiest time to make a rational decision about a losing position is before it exists. When you open a short option, write down:
+
+- **The price at which you will close,** whatever a roll might offer.
+- **How many times you will roll** before you stop. Many disciplined traders allow one roll, or none.
+- **What would have to be true** about the company for you to stay in.
+
+Then, when the trade goes against you, you are following a decision you made calmly rather than making one under pressure. Run the new trade through the [cash-secured put calculator](/tools/cash-secured-put-calculator) as if it were a fresh position, and look at the breakeven and maximum loss before you accept the credit. For more on why sensible plans fall apart at the moment of decision, read [The Psychology of Money](/psychology/the-psychology-of-money-summary).

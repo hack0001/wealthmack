@@ -69,7 +69,7 @@ The strategy is only as safe as the cash behind it. Selling puts without the cas
 
 ## If you are assigned
 
-Being assigned is not a failure. It is the outcome you agreed to. You now own 100 shares at an effective $46.50, and you can hold them like any other investment. Many investors then sell a covered call against them, collecting a second premium while they wait to sell at a higher price. Running puts and calls one after the other like this is known as the wheel, and it works only if every share you might be assigned is one you would be happy to hold for years.
+Being assigned is not a failure. It is the outcome you agreed to. You now own 100 shares at an effective $46.50, and you can hold them like any other investment. Many investors then sell a covered call against them, collecting a second premium while they wait to sell at a higher price. Running puts and calls one after the other like this is known as [the wheel](/options/the-wheel-strategy), and it works only if every share you might be assigned is one you would be happy to hold for years.
 
 ## Reading the annualised number
 

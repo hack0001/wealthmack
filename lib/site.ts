@@ -28,6 +28,11 @@ export const site = {
   // Cloudflare > Web Analytics > Manage site > "Enable with JS Snippet
   // installation": copy the value after "token" in the snippet. Leave empty
   // to turn the analytics script off.
+  // Kit (ConvertKit) form that newsletter signups are sent to. The number is
+  // in the form's embed code: app.kit.com/forms/<this number>/subscriptions
+  newsletter: {
+    kitFormId: "3725680",
+  },
   analytics: {
     cloudflareToken: "0d27157c7d924c1590aafb5e8ff6e020",
   },

@@ -208,3 +208,34 @@ a:hover { color: var(--ink); }
 }
 .skip-link:focus { top: 1rem; }
 main:focus { outline: none; }
+
+/* Newsletter signup */
+.signup {
+  background: var(--charcoal); color: #cfccc3; border-radius: 10px;
+  padding: 1.75rem; display: grid; gap: 1.25rem; max-width: var(--measure);
+}
+@media (min-width: 40rem) { .signup { padding: 2.25rem; } }
+.signup h2 { color: var(--paper); font-size: clamp(1.4rem, 2.4vw, 1.75rem); }
+.signup-copy { display: grid; gap: 0.6rem; }
+.signup-copy p { color: #b5b2a8; }
+.signup-form { display: grid; gap: 0.5rem; }
+.signup-label { font-size: 0.9rem; color: #b5b2a8; }
+.signup-row { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+.signup-input {
+  flex: 1 1 14rem; min-width: 0; font: inherit; color: var(--ink);
+  background: var(--paper); border: 1px solid transparent; border-radius: 6px; padding: 0.75rem 0.9rem;
+}
+.signup-input:focus { outline: none; border-color: var(--copper); box-shadow: 0 0 0 3px rgba(196, 114, 42, 0.35); }
+.signup-button {
+  flex: 0 0 auto; font: inherit; font-weight: 600; cursor: pointer;
+  background: var(--copper); color: var(--charcoal); border: 0; border-radius: 6px; padding: 0.75rem 1.35rem;
+}
+.signup-button:hover { background: #d98a43; }
+.signup-button:disabled { opacity: 0.7; cursor: progress; }
+.signup-trap { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+.signup-note { font-size: 0.85rem; color: #9a978e; }
+.signup-note a { color: #cfccc3; }
+.signup-done { color: var(--paper); font-weight: 500; border-left: 3px solid var(--copper); padding-left: 0.9rem; }
+.signup-error { color: #f0a796; }
+.home-signup { padding-top: 5rem; }
+.article-signup { margin-top: 2rem; }

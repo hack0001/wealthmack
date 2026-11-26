@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { getArticle } from "@/lib/content";
+import NewsletterSignup from "./NewsletterSignup";
 import { longDate } from "@/lib/format";
 import { sections, site, type SectionKey } from "@/lib/site";
 
@@ -62,6 +63,9 @@ export default function ArticlePage({ section, slug }: { section: SectionKey; sl
           <Link className="button" href={a.tool}>Open the calculator</Link>
         </aside>
       )}
+      <div className="article-signup">
+        <NewsletterSignup heading="Get the next one by email" />
+      </div>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify([jsonLd, breadcrumbs]).replace(/</g, "\\u003c") }} />
     </article>
   );

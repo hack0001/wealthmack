@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import CoveredCallCalculator from "@/components/CoveredCallCalculator";
 import ArticleList from "@/components/ArticleList";
+import NewsletterSignup from "@/components/NewsletterSignup";
 import { getArticles } from "@/lib/content";
 import { sections, site } from "@/lib/site";
 
@@ -54,6 +55,12 @@ export default function Home() {
               />
             </div>
           ))}
+        </div>
+      </section>
+
+      <section className="home-signup">
+        <div className="wrap">
+          <NewsletterSignup />
         </div>
       </section>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
