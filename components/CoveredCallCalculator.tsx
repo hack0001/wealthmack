@@ -11,7 +11,7 @@ import {
   stockProfit,
 } from "@/lib/options";
 import { money, money0, pct, signedMoney0 } from "@/lib/format";
-import PayoffChart, { chartRange } from "./PayoffChart";
+import PayoffChart from "./PayoffChart";
 
 const fields = [
   { key: "stockPrice", label: "Share price", hint: "What you paid, or today's price", step: "0.01", prefix: "$" },
@@ -84,7 +84,9 @@ export default function CoveredCallCalculator({ compact = false }: { compact?: b
   }
 
   const r = coveredCall(input);
-  const { lo, hi } = chartRange(input);
+  const breakeven = input.stockPrice - input.premium;
+  const lo = Math.max(0, Math.min(input.stockPrice * 0.7, breakeven * 0.9));
+  const hi = Math.max(input.stockPrice * 1.3, (input.strike + input.premium) * 1.1);
   const at = scrub ?? input.strike;
   const ccAt = coveredCallProfit(input, at) * r.shares;
   const stAt = stockProfit(input, at) * r.shares;
@@ -95,7 +97,18 @@ export default function CoveredCallCalculator({ compact = false }: { compact?: b
       {form}
 
       <div className="calc-chart">
-        <PayoffChart input={input} scrub={at} onScrub={setScrub} />
+        <PayoffChart
+          lo={lo}
+          hi={hi}
+          strike={input.strike}
+          breakeven={breakeven}
+          profit={(p) => coveredCallProfit(input, p) * r.shares}
+          compare={(p) => stockProfit(input, p) * r.shares}
+          compareLabel="Shares only"
+          ariaLabel={`Profit at expiration for the covered call compared with holding the shares. Breakeven ${money(breakeven)}, maximum profit ${money0(r.maxProfit)} at or above ${money(input.strike)}.`}
+          scrub={at}
+          onScrub={setScrub}
+        />
         <label className="scrub">
           <span className="scrub-label">
             If the shares finish at <strong>{money(at)}</strong>

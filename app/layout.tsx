@@ -17,6 +17,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en">
       <body>
+        <a className="skip-link" href="#content">
+          Skip to content
+        </a>
         <header className="masthead">
           <div className="wrap">
             <Link href="/" className="wordmark">
@@ -31,7 +34,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             </nav>
           </div>
         </header>
-        <main>{children}</main>
+        <main id="content" tabIndex={-1}>
+          {children}
+        </main>
         <footer className="colophon">
           <div className="wrap">
             <p>
@@ -46,6 +51,13 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             </nav>
           </div>
         </footer>
+        {site.analytics.cloudflareToken && (
+          <script
+            type="module"
+            src="https://static.cloudflareinsights.com/beacon.min.js"
+            data-cf-beacon={JSON.stringify({ token: site.analytics.cloudflareToken })}
+          />
+        )}
       </body>
     </html>
   );

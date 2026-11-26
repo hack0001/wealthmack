@@ -197,3 +197,14 @@ a:hover { color: var(--ink); }
 .hero-copy .credential { font-size: 0.95rem; color: #b5b2a8; }
 .credential a { color: inherit; text-decoration-color: rgba(196, 114, 42, 0.7); }
 .credential a:hover { color: var(--paper); }
+
+.prose .article-list { padding-left: 0; gap: 0; }
+
+/* Skip link: hidden until a keyboard user tabs to it */
+.skip-link {
+  position: absolute; left: 1rem; top: -4rem; z-index: 10;
+  background: var(--copper); color: var(--charcoal); font-weight: 600;
+  padding: 0.6rem 1rem; border-radius: 6px; text-decoration: none;
+}
+.skip-link:focus { top: 1rem; }
+main:focus { outline: none; }

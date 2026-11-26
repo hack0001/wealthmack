@@ -5,8 +5,8 @@ export const site = {
   tagline: "Options income, worked through with real numbers",
   description:
     "Calculators and worked examples for covered calls, cash-secured puts and the wheel, plus the psychology behind the decisions that go wrong.",
-  // TODO before launch: your name and background. The About page, article
-  // bylines and structured data all read from here.
+  // Author details. The About page, article bylines and structured data all
+  // read from here.
   author: {
     name: "Tom Patel",
     // One line, shown under the homepage headline.
@@ -16,14 +16,20 @@ export const site = {
     bio: [
       "I’m Tom Patel. I worked in investment management at a FTSE 250 firm, involved in the day-to-day running of investments, and hold a CISI investment management certificate.",
       "Working inside a large firm showed me how professionals actually think about income, risk and diversification. My specialities are dividend investing, portfolio theory and fixed income: how to build a portfolio that pays you, how its parts behave together, and what bonds really add. These days I invest my own money.",
-      "Most of this knowledge sits behind gatekeepers: adviser fees, paywalls and jargon. WealthMack takes it out from behind them. Every article and calculator shows its working, so you can check it rather than take my word for it.",
+      "Most of what the industry knows sits behind adviser fees, paywalls and jargon. WealthMack is my way of giving you the edge professionals have, without the gatekeepers. Every article and calculator shows its working, so you can check it rather than take my word for it.",
     ],
     knowsAbout: ["Dividend investing", "Portfolio theory", "Fixed income", "Options income strategies", "Investor psychology"],
   },
-  // TODO before launch: the address readers and the privacy policy point to.
-  // The contact section and privacy contact details stay hidden until set.
+  // The address readers and the privacy policy point to.
   contact: {
     email: "thomas@wealthmack.com",
+  },
+  // Cloudflare Web Analytics site token (public, safe to commit). Find it in
+  // Cloudflare > Web Analytics > Manage site > "Enable with JS Snippet
+  // installation": copy the value after "token" in the snippet. Leave empty
+  // to turn the analytics script off.
+  analytics: {
+    cloudflareToken: "0d27157c7d924c1590aafb5e8ff6e020",
   },
 };
 

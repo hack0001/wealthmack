@@ -1,12 +1,6 @@
 "use client";
 
 import { useId, useRef } from "react";
-import {
-  CoveredCallInput,
-  SHARES_PER_CONTRACT,
-  coveredCallProfit,
-  stockProfit,
-} from "@/lib/options";
 import { money, money0, signedMoney0 } from "@/lib/format";
 
 const W = 640;
@@ -25,33 +19,45 @@ function niceTicks(min: number, max: number, count: number) {
   return ticks;
 }
 
-export function chartRange(i: CoveredCallInput) {
-  const breakeven = i.stockPrice - i.premium;
-  const lo = Math.max(0, Math.min(i.stockPrice * 0.7, breakeven * 0.9));
-  const hi = Math.max(i.stockPrice * 1.3, (i.strike + i.premium) * 1.1);
-  return { lo, hi };
-}
-
+/**
+ * Profit-at-expiration chart for a single-option strategy. Both lines are
+ * straight apart from one kink at the strike, so three points draw each one.
+ * All values are totals in dollars (already multiplied by the share count).
+ */
 export default function PayoffChart({
-  input,
+  lo,
+  hi,
+  strike,
+  breakeven,
+  profit,
+  compare,
+  compareLabel,
+  ariaLabel,
   scrub,
   onScrub,
 }: {
-  input: CoveredCallInput;
+  lo: number;
+  hi: number;
+  strike: number;
+  breakeven: number;
+  /** Profit of the strategy at a given price on expiration day */
+  profit: (price: number) => number;
+  /** Profit of the plain-shares alternative, drawn dashed */
+  compare: (price: number) => number;
+  compareLabel: string;
+  ariaLabel: string;
   scrub: number;
   onScrub: (price: number) => void;
 }) {
   const id = useId();
   const svg = useRef<SVGSVGElement>(null);
-  const shares = input.contracts * SHARES_PER_CONTRACT;
-  const { lo, hi } = chartRange(input);
-  const breakeven = input.stockPrice - input.premium;
+  const cc = profit;
+  const st = compare;
+  const points = [lo, strike, hi];
 
-  const cc = (p: number) => coveredCallProfit(input, p) * shares;
-  const st = (p: number) => stockProfit(input, p) * shares;
-
-  const yMinRaw = Math.min(cc(lo), st(lo));
-  const yMaxRaw = Math.max(cc(hi), st(hi));
+  const values = points.flatMap((p) => [cc(p), st(p)]);
+  const yMinRaw = Math.min(...values);
+  const yMaxRaw = Math.max(...values);
   const pad = (yMaxRaw - yMinRaw) * 0.08;
   const yMin = yMinRaw - pad;
   const yMax = yMaxRaw + pad;
@@ -61,7 +67,7 @@ export default function PayoffChart({
   const y = (v: number) =>
     M.top + (1 - (v - yMin) / (yMax - yMin)) * (H - M.top - M.bottom);
 
-  const ccPath = `M${x(lo)},${y(cc(lo))} L${x(input.strike)},${y(cc(input.strike))} L${x(hi)},${y(cc(hi))}`;
+  const ccPath = `M${x(lo)},${y(cc(lo))} L${x(strike)},${y(cc(strike))} L${x(hi)},${y(cc(hi))}`;
   const ccArea = `${ccPath} L${x(hi)},${y(0)} L${x(lo)},${y(0)} Z`;
   const stPath = `M${x(lo)},${y(st(lo))} L${x(hi)},${y(st(hi))}`;
 
@@ -82,7 +88,7 @@ export default function PayoffChart({
       className="chart"
       viewBox={`0 0 ${W} ${H}`}
       role="img"
-      aria-label={`Profit at expiration for the covered call compared with holding the shares. Breakeven ${money(breakeven)}, maximum profit ${money0(cc(input.strike))} at or above ${money(input.strike)}.`}
+      aria-label={ariaLabel}
       onPointerDown={(e) => {
         (e.target as Element).setPointerCapture?.(e.pointerId);
         fromPointer(e);
@@ -152,11 +158,11 @@ export default function PayoffChart({
       </text>
       <text
         className="chart-label"
-        x={x(input.strike)}
-        y={y(cc(input.strike)) - 10}
-        textAnchor={x(input.strike) > W * 0.7 ? "end" : "start"}
+        x={x(strike)}
+        y={y(cc(strike)) - 10}
+        textAnchor={x(strike) > W * 0.7 ? "end" : "start"}
       >
-        Strike {money(input.strike)}
+        Strike {money(strike)}
       </text>
       <text
         className="chart-label chart-label-muted"
@@ -164,7 +170,7 @@ export default function PayoffChart({
         y={Math.max(M.top - 8, y(st(hi)) - 8)}
         textAnchor="end"
       >
-        Shares only
+        {compareLabel}
       </text>
 
       <line className="chart-scrub" x1={x(s)} x2={x(s)} y1={M.top} y2={H - M.bottom} />

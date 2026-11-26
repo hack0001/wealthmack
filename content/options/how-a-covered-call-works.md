@@ -61,3 +61,5 @@ Two things follow that are easy to miss when the strategy is described as "incom
 - Would you be content to sell the shares at the strike? If not, the strike is too low.
 - Would you still want to own the shares 15% lower? The call does very little to protect you there.
 - Is the premium worth the upside you are giving away? Put your own numbers in the calculator and look at where the two lines cross.
+
+Don't own the shares yet? A [cash-secured put](/options/how-a-cash-secured-put-works) is the mirror-image trade: you are paid to wait for a lower price to buy them.

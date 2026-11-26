@@ -1,13 +1,68 @@
 # Cloudflare redirects, one per line: <old path> <new path> <status>
-# "/*" matches the old multi-page versions (/2/, /3/ ...) of an article too.
+# "/*" also catches the old trailing-slash and multi-page versions (/2/, /3/ ...).
 #
-# Only old URLs with a genuinely related page on the new site are redirected.
-# Everything else from the old site gets the custom 404 page, which is what
-# Google expects for content that no longer exists.
+# Only old URLs with a related page on the new site are redirected. Everything
+# else from the old site gets the custom 404 page, which is what Google expects
+# for content that no longer exists.
 
-# Old WordPress articles (2023-2025)
-/11-bad-financial-habits-that-are-keeping-you-poor     /psychology  301
-/11-bad-financial-habits-that-are-keeping-you-poor/*   /psychology  301
+# Old book summaries and money-habits articles (the two rewritten summaries go to their new versions)
+/the-psychology-of-money-summary                                /psychology/the-psychology-of-money-summary  301
+/the-psychology-of-money-summary/*                              /psychology/the-psychology-of-money-summary  301
+/the-intelligent-investor-summary                               /psychology/the-intelligent-investor-summary  301
+/the-intelligent-investor-summary/*                             /psychology/the-intelligent-investor-summary  301
+/principles-summary-ray-dalio                                   /psychology  301
+/principles-summary-ray-dalio/*                                 /psychology  301
+/rich-dad-poor-dad-summary                                      /psychology  301
+/rich-dad-poor-dad-summary/*                                    /psychology  301
+/think-and-grow-rich-summary                                    /psychology  301
+/think-and-grow-rich-summary/*                                  /psychology  301
+/i-will-teach-you-to-be-rich-summary                            /psychology  301
+/i-will-teach-you-to-be-rich-summary/*                          /psychology  301
+/money-master-the-game-summary                                  /psychology  301
+/money-master-the-game-summary/*                                /psychology  301
+/the-broke-millennial-summary                                   /psychology  301
+/the-broke-millennial-summary/*                                 /psychology  301
+/the-automatic-millionaire-summary                              /psychology  301
+/the-automatic-millionaire-summary/*                            /psychology  301
+/the-richest-man-in-babylon-summary                             /psychology  301
+/the-richest-man-in-babylon-summary/*                           /psychology  301
+/the-total-money-makeover-summary                               /psychology  301
+/the-total-money-makeover-summary/*                             /psychology  301
+/best-finance-books                                             /psychology  301
+/best-finance-books/*                                           /psychology  301
+/11-bad-financial-habits-that-are-keeping-you-poor              /psychology  301
+/11-bad-financial-habits-that-are-keeping-you-poor/*            /psychology  301
+/the-story-of-gamestop-and-why-it-needs-to-be-remembered        /psychology  301
+/the-story-of-gamestop-and-why-it-needs-to-be-remembered/*      /psychology  301
+
+# Old trading articles
+/trading-to-financial-freedom                                   /options  301
+/trading-to-financial-freedom/*                                 /options  301
+/the-traders-that-changed-their-lives-from-their-spare-bedrooms /options  301
+/the-traders-that-changed-their-lives-from-their-spare-bedrooms/* /options  301
+
+# Old site pages (the old site used trailing slashes; make those moves permanent)
+/about/                                                         /about  301
+/privacy/                                                       /privacy  301
+/contact                                                        /about  301
+/contact/*                                                      /about  301
+
+/terms                                                          /disclosures  301
+/terms/*                                                        /disclosures  301
+/disclaimer-policy                                              /disclosures  301
+/disclaimer-policy/*                                            /disclosures  301
+
+/cookies                                                        /privacy  301
+/cookies/*                                                      /privacy  301
+
+/email-signup                                                   /  301
+/email-signup/*                                                 /  301
+/html-sitemap                                                   /  301
+/html-sitemap/*                                                 /  301
+/homepage                                                       /  301
+/homepage/*                                                     /  301
+/posts                                                          /  301
+/posts/*                                                        /  301
 
 # Old magazine site (2020-2022)
 /business/online-trading-meet-the-traders-who-became-millionaires-from-working-at-home/*  /options  301

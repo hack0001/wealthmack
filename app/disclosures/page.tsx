@@ -7,8 +7,8 @@ export const metadata: Metadata = {
   alternates: { canonical: "/disclosures" },
 };
 
-// TODO: have this page checked against the rules that apply to you before
-// launch, especially before adding any broker or software affiliate links.
+// Have this page checked against the rules that apply to you before adding
+// any broker or software affiliate links.
 export default function Disclosures() {
   return (
     <div className="wrap">

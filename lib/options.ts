@@ -86,3 +86,78 @@ export function coveredCall(i: CoveredCallInput): CoveredCallResult {
     downsideCushion: i.premium / i.stockPrice,
   };
 }
+
+// Cash-secured put maths. You sell a put and set aside enough cash to buy
+// the shares at the strike if you are assigned.
+
+export type CashSecuredPutInput = {
+  /** Today's share price, used for the "buy the shares now" comparison */
+  stockPrice: number;
+  /** Strike of the put sold: the price you agree to buy at */
+  strike: number;
+  /** Premium received per share */
+  premium: number;
+  days: number;
+  contracts: number;
+};
+
+export type CashSecuredPutResult = {
+  shares: number;
+  /** Cash set aside to cover assignment (strike x shares) */
+  cashRequired: number;
+  premiumIncome: number;
+  /** Strike minus premium: your real cost per share if assigned */
+  breakeven: number;
+  maxProfit: number;
+  maxLoss: number;
+  /** Premium as a share of the cash set aside */
+  returnOnCash: number;
+  annualisedReturn: number;
+  /** How far below today's price your effective purchase price sits */
+  discountIfAssigned: number;
+};
+
+export function isValidPut(i: CashSecuredPutInput): boolean {
+  return (
+    [i.stockPrice, i.strike, i.premium, i.days, i.contracts].every(Number.isFinite) &&
+    i.stockPrice > 0 &&
+    i.strike > 0 &&
+    i.premium >= 0 &&
+    i.premium < i.strike &&
+    i.days >= 1 &&
+    i.contracts >= 1
+  );
+}
+
+/** Profit per share at expiration for the short put. */
+export function cashSecuredPutProfit(i: CashSecuredPutInput, priceAtExpiry: number) {
+  return i.premium - Math.max(0, i.strike - priceAtExpiry);
+}
+
+/** Profit per share for buying the shares today instead. */
+export function buyNowProfit(i: CashSecuredPutInput, priceAtExpiry: number) {
+  return priceAtExpiry - i.stockPrice;
+}
+
+/** Above this price at expiration, buying the shares today would have made more. */
+export function putCrossover(i: CashSecuredPutInput) {
+  return i.stockPrice + i.premium;
+}
+
+export function cashSecuredPut(i: CashSecuredPutInput): CashSecuredPutResult {
+  const shares = i.contracts * SHARES_PER_CONTRACT;
+  const breakeven = i.strike - i.premium;
+  const returnOnCash = i.premium / i.strike;
+  return {
+    shares,
+    cashRequired: i.strike * shares,
+    premiumIncome: i.premium * shares,
+    breakeven,
+    maxProfit: i.premium * shares,
+    maxLoss: breakeven * shares,
+    returnOnCash,
+    // Simple annualisation, for comparing trades of different lengths only.
+    annualisedReturn: returnOnCash * (365 / i.days),
+    discountIfAssigned: (i.stockPrice - breakeven) / i.stockPrice,
+  };
+}

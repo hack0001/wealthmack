@@ -14,6 +14,11 @@ const tools = [
     title: "Covered call calculator",
     text: "Breakeven, maximum profit, return if called and a payoff chart you can drag through.",
   },
+  {
+    href: "/tools/cash-secured-put-calculator",
+    title: "Cash-secured put calculator",
+    text: "Return on cash, your real purchase price if assigned, and a payoff chart against buying the shares today.",
+  },
 ];
 
 export default function Tools() {
